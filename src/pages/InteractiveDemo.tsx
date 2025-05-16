@@ -11,15 +11,15 @@ import { toast } from 'sonner';
 type ApiEndpoint = 'create-card' | 'get-card' | 'create-charge';
 
 interface FormValues {
-  createCard: {
+  'create-card': {
     amount: string;
     currency: string;
     metadata: string;
   };
-  getCard: {
+  'get-card': {
     cardId: string;
   };
-  createCharge: {
+  'create-charge': {
     cardId: string;
     amount: string;
     description: string;
@@ -38,15 +38,15 @@ const InteractiveDemo = () => {
   const [response, setResponse] = useState<ApiResponse | null>(null);
   
   const [formValues, setFormValues] = useState<FormValues>({
-    createCard: {
+    'create-card': {
       amount: '100',
       currency: 'USD',
       metadata: '{"purpose": "Office supplies"}'
     },
-    getCard: {
+    'get-card': {
       cardId: 'card_1234567890abcdef'
     },
-    createCharge: {
+    'create-charge': {
       cardId: 'card_1234567890abcdef',
       amount: '50',
       description: 'Office supplies purchase'
@@ -78,8 +78,8 @@ const InteractiveDemo = () => {
             success: true,
             data: {
               id: 'card_' + Math.random().toString(36).substring(2, 15),
-              amount: parseFloat(formValues.createCard.amount),
-              currency: formValues.createCard.currency,
+              amount: parseFloat(formValues['create-card'].amount),
+              currency: formValues['create-card'].currency,
               status: 'active',
               created: new Date().toISOString()
             }
@@ -89,7 +89,7 @@ const InteractiveDemo = () => {
           mockResponse = {
             success: true,
             data: {
-              id: formValues.getCard.cardId,
+              id: formValues['get-card'].cardId,
               amount: 100,
               currency: 'USD',
               status: 'active',
@@ -111,10 +111,10 @@ const InteractiveDemo = () => {
               success: true,
               data: {
                 id: 'ch_' + Math.random().toString(36).substring(2, 15),
-                card_id: formValues.createCharge.cardId,
-                amount: parseFloat(formValues.createCharge.amount),
+                card_id: formValues['create-charge'].cardId,
+                amount: parseFloat(formValues['create-charge'].amount),
                 status: 'succeeded',
-                description: formValues.createCharge.description,
+                description: formValues['create-charge'].description,
                 created: new Date().toISOString()
               }
             };
@@ -156,24 +156,24 @@ const InteractiveDemo = () => {
                     <Label htmlFor="amount">Amount</Label>
                     <Input 
                       id="amount" 
-                      value={formValues.createCard.amount} 
-                      onChange={(e) => handleInputChange('createCard', 'amount', e.target.value)} 
+                      value={formValues['create-card'].amount} 
+                      onChange={(e) => handleInputChange('create-card', 'amount', e.target.value)} 
                     />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="currency">Currency</Label>
                     <Input 
                       id="currency" 
-                      value={formValues.createCard.currency} 
-                      onChange={(e) => handleInputChange('createCard', 'currency', e.target.value)} 
+                      value={formValues['create-card'].currency} 
+                      onChange={(e) => handleInputChange('create-card', 'currency', e.target.value)} 
                     />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="metadata">Metadata (JSON)</Label>
                     <Input 
                       id="metadata" 
-                      value={formValues.createCard.metadata} 
-                      onChange={(e) => handleInputChange('createCard', 'metadata', e.target.value)} 
+                      value={formValues['create-card'].metadata} 
+                      onChange={(e) => handleInputChange('create-card', 'metadata', e.target.value)} 
                     />
                   </div>
                 </TabsContent>
@@ -183,8 +183,8 @@ const InteractiveDemo = () => {
                     <Label htmlFor="cardId">Card ID</Label>
                     <Input 
                       id="cardId" 
-                      value={formValues.getCard.cardId} 
-                      onChange={(e) => handleInputChange('getCard', 'cardId', e.target.value)} 
+                      value={formValues['get-card'].cardId} 
+                      onChange={(e) => handleInputChange('get-card', 'cardId', e.target.value)} 
                     />
                   </div>
                 </TabsContent>
@@ -194,24 +194,24 @@ const InteractiveDemo = () => {
                     <Label htmlFor="chargeCardId">Card ID</Label>
                     <Input 
                       id="chargeCardId" 
-                      value={formValues.createCharge.cardId} 
-                      onChange={(e) => handleInputChange('createCharge', 'cardId', e.target.value)} 
+                      value={formValues['create-charge'].cardId} 
+                      onChange={(e) => handleInputChange('create-charge', 'cardId', e.target.value)} 
                     />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="chargeAmount">Amount</Label>
                     <Input 
                       id="chargeAmount" 
-                      value={formValues.createCharge.amount} 
-                      onChange={(e) => handleInputChange('createCharge', 'amount', e.target.value)} 
+                      value={formValues['create-charge'].amount} 
+                      onChange={(e) => handleInputChange('create-charge', 'amount', e.target.value)} 
                     />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="chargeDescription">Description</Label>
                     <Input 
                       id="chargeDescription" 
-                      value={formValues.createCharge.description} 
-                      onChange={(e) => handleInputChange('createCharge', 'description', e.target.value)} 
+                      value={formValues['create-charge'].description} 
+                      onChange={(e) => handleInputChange('create-charge', 'description', e.target.value)} 
                     />
                   </div>
                 </TabsContent>
