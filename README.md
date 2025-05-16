@@ -1,7 +1,8 @@
-# 💳 GhostPay-Lite: Microservice-based Payment Token API
+# GhostPay-Lite: Microservice-based Payment💳
 
 GhostPay-Lite is a lightweight, secure, and scalable **payment token microservice API** that issues single-use virtual cards and processes charges. Designed with a **microservices architecture**, it features **JWT-based authentication**, **rate limiting**, **observability**, and **zero-downtime deployments**.
 
+![grafana node dash](https://github.com/user-attachments/assets/d1e727df-79e5-438b-b53d-4727aad69820)
 
 ## 📌 Features
 
@@ -124,6 +125,14 @@ Returns the card status.
 ### 🔹 POST `/charges`
 
 Charges a virtual card.
+
+## Architecture
+
+![dash1](https://github.com/user-attachments/assets/39f237a3-d6c2-411e-b6c4-42b7294842a9)
+![dash2](https://github.com/user-attachments/assets/f703e9db-f3a0-4695-a279-1b9e2bd7f6a6)
+![dash3](https://github.com/user-attachments/assets/e373281e-f1b6-4d16-b996-6f31b9caa760)
+![docker](https://github.com/user-attachments/assets/40c38009-6512-4bdd-98e9-c526cc0af65a)
+![dash4](https://github.com/user-attachments/assets/55010d73-9a80-446c-b251-fd4967f759b7)
 
 ## 🔐 Authentication
 
