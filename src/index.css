@@ -5,7 +5,7 @@
 
 @layer base {
   :root {
-    --background: 210 40% 98%;
+    --background: 217 35% 95%;
     --foreground: 222 47% 11%;
 
     --card: 0 0% 100%;
@@ -14,16 +14,16 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
 
-    --primary: 215 100% 38%;
+    --primary: 221 70% 45%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 210 40% 96%;
+    --secondary: 217 33% 92%;
     --secondary-foreground: 222 47% 11%;
 
     --muted: 210 40% 96%;
     --muted-foreground: 215 16% 47%;
 
-    --accent: 199 89% 48%;
+    --accent: 221 70% 55%;
     --accent-foreground: 210 40% 98%;
 
     --destructive: 0 84% 60%;
@@ -31,39 +31,39 @@
 
     --border: 214 32% 91%;
     --input: 214 32% 91%;
-    --ring: 222 84% 5%;
+    --ring: 221 70% 45%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
   }
 
   .dark {
-    --background: 225 25% 10%;
+    --background: 222 30% 10%;
     --foreground: 210 40% 98%;
 
-    --card: 222 47% 5%;
+    --card: 222 35% 15%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222 47% 5%;
+    --popover: 222 35% 15%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 215 100% 45%;
+    --primary: 217 70% 50%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 217 33% 18%;
+    --secondary: 217 33% 25%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 217 33% 18%;
+    --muted: 217 33% 20%;
     --muted-foreground: 215 20% 65%;
 
-    --accent: 199 89% 48%;
+    --accent: 217 70% 55%;
     --accent-foreground: 210 40% 98%;
 
     --destructive: 0 63% 31%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217 33% 18%;
-    --input: 217 33% 18%;
-    --ring: 213 27% 84%;
+    --border: 217 33% 25%;
+    --input: 217 33% 25%;
+    --ring: 213 70% 50%;
   }
 }
 
@@ -83,7 +83,7 @@
 }
 
 .hero-gradient {
-  @apply bg-gradient-to-br from-ghost-800 via-ghost-700 to-ghost-600 text-white;
+  @apply bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 text-white;
 }
 
 .card-gradient {
@@ -91,5 +91,58 @@
 }
 
 .feature-card {
-  @apply p-6 rounded-xl border shadow-sm transition-all duration-300 hover:shadow-md;
+  @apply p-6 rounded-xl border shadow-sm transition-all duration-300 hover:shadow-md hover:shadow-primary/10 hover:-translate-y-1;
+}
+
+/* Fancy modern effects */
+.glass-panel {
+  @apply backdrop-blur-md bg-white/10 border border-white/20 shadow-lg;
+}
+
+.spotlight-hover {
+  @apply relative overflow-hidden z-10 transition-all duration-300;
+}
+
+.spotlight-hover::before {
+  content: '';
+  @apply absolute -inset-px bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl opacity-0 transition-opacity duration-300 z-[-1];
+}
+
+.spotlight-hover:hover::before {
+  @apply opacity-50;
+}
+
+.fancy-button {
+  @apply relative overflow-hidden bg-gradient-to-r from-blue-800 to-blue-600 hover:from-blue-700 hover:to-blue-500 
+         transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-blue-500/20 scale-100 hover:scale-[1.02];
+}
+
+.fancy-card {
+  @apply bg-gradient-to-br from-white/80 to-white/50 dark:from-slate-800/80 dark:to-slate-900/70
+         backdrop-blur-md border border-white/20 dark:border-white/10 rounded-xl p-6
+         shadow-md hover:shadow-lg transition-all duration-300
+         hover:-translate-y-1 hover:shadow-primary/10;
+}
+
+.navy-gradient-bg {
+  @apply bg-gradient-to-br from-blue-900 via-indigo-900 to-blue-800;
+}
+
+/* Animation keyframes */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-border {
+  0%, 100% { border-color: rgba(255,255,255,0.1); }
+  50% { border-color: rgba(255,255,255,0.3); }
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+.animate-pulse-border {
+  animation: pulse-border 3s ease-in-out infinite;
 }

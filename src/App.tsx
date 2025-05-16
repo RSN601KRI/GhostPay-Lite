@@ -11,23 +11,33 @@ import InteractiveDemo from "./pages/InteractiveDemo";
 import ApiDocs from "./pages/ApiDocs";
 import NotFound from "./pages/NotFound";
 
-const queryClient = new QueryClient();
+// Create a custom theme-enabled QueryClient
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      staleTime: 5 * 60 * 1000,
+    },
+  },
+});
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <BrowserRouter>
       <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/dashboard" element={<Index />} />
-          <Route path="/api-docs/spec" element={<OpenApiSpec />} />
-          <Route path="/api-docs" element={<ApiDocs />} />
-          <Route path="/interactive-demo" element={<InteractiveDemo />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <div className="min-h-screen bg-background transition-all duration-300">
+          <Toaster />
+          <Sonner />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/dashboard" element={<Index />} />
+            <Route path="/api-docs/spec" element={<OpenApiSpec />} />
+            <Route path="/api-docs" element={<ApiDocs />} />
+            <Route path="/interactive-demo" element={<InteractiveDemo />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
       </TooltipProvider>
     </BrowserRouter>
   </QueryClientProvider>
