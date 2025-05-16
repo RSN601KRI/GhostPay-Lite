@@ -1,73 +1,170 @@
-# Welcome to your Lovable project
+# 💳 GhostPay-Lite: Microservice-based Payment Token API
 
-## Project info
+GhostPay-Lite is a lightweight, secure, and scalable **payment token microservice API** that issues single-use virtual cards and processes charges. Designed with a **microservices architecture**, it features **JWT-based authentication**, **rate limiting**, **observability**, and **zero-downtime deployments**.
 
-**URL**: https://lovable.dev/projects/27dc0e40-b8c3-4d57-9ae2-fd0108a0664c
 
-## How can I edit this code?
+## 📌 Features
 
-There are several ways of editing your application.
+- 🔐 Single-use virtual card issuance
+- 💸 Secure card charge processing
+- 🛡️ JWT-based RBAC (Admin, Merchant, User)
+- 🔁 Live key rotation with Vault / AWS Secrets Manager
+- 📊 Observability with Prometheus, Grafana, OpenTelemetry
+- ⚙️ CI/CD with blue-green or canary deployment
+- 🚀 High availability on Kubernetes (≥2 replicas in 2 AZs)
 
-**Use Lovable**
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/27dc0e40-b8c3-4d57-9ae2-fd0108a0664c) and start prompting.
+## ⚙️ Tech Stack
 
-Changes made via Lovable will be committed automatically to this repo.
+| Layer                | Tech Used                                         |
+|---------------------|--------------------------------------------------|
+| API Spec            | OpenAPI (Swagger YAML)                           |
+| Services            | Node.js / Python / Go / Java (choose one)        |
+| Containerization    | Docker                                           |
+| Orchestration       | Kubernetes (KinD, Minikube, or Cloud Provider)   |
+| CI/CD               | GitHub Actions / Jenkins                         |
+| Rate Limiting       | Redis / Kong / Envoy                             |
+| Authentication      | JWT (asymmetric keys), Vault or AWS SM           |
+| Storage             | PostgreSQL (cards & charges), MongoDB/DynamoDB (analytics) |
+| Monitoring          | Prometheus, Grafana, OpenTelemetry               |
+| Secrets Management  | HashiCorp Vault / AWS Secrets Manager            |
+| Load Testing        | k6 or Locust                                      |
 
-**Use your preferred IDE**
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 📁 Project Structure
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
 ```
 
-**Edit a file directly in GitHub**
+ghostpay-lite/
+├── api-spec/                # OpenAPI spec (YAML)
+├── services/                # Microservices
+│   ├── auth/
+│   ├── cards/
+│   ├── charges/
+│   └── analytics/
+├── infra/
+│   ├── k8s/                 # Helm charts or manifests
+│   └── terraform/           # (Optional) Cloud infra automation
+├── ci-cd/
+│   └── github-actions.yaml  # CI/CD workflows
+├── secrets/
+│   └── vault-policies.hcl   # Vault config
+├── monitoring/
+│   ├── prometheus/
+│   └── grafana/
+├── load-test/
+│   └── k6-script.js         # Load testing scripts
+├── docs/
+│   └── architecture.md
+└── README.md
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+````
 
-**Use GitHub Codespaces**
+## 🚀 Getting Started
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### Prerequisites
 
-## What technologies are used for this project?
+- Docker
+- Kubernetes (Minikube/KinD or EKS/GKE)
+- Vault / AWS Secrets Manager
+- Helm
+- Node.js / Python / Go SDKs (based on your service language)
+- k6 / Locust (for load testing)
 
-This project is built with:
+### 1. Clone the Repository
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+```bash
+git clone https://github.com/your-org/ghostpay-lite.git
+cd ghostpay-lite
+````
 
-## How can I deploy this project?
+### 2. Spin Up Services (Locally)
 
-Simply open [Lovable](https://lovable.dev/projects/27dc0e40-b8c3-4d57-9ae2-fd0108a0664c) and click on Share -> Publish.
+```bash
+# Start Kubernetes cluster (using KinD or Minikube)
+minikube start
 
-## Can I connect a custom domain to my Lovable project?
+# Deploy services using Helm
+helm install ghostpay ./infra/k8s
 
-Yes, you can!
+# Forward ports if needed
+kubectl port-forward svc/cards-service 8000:80
+```
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## 🧪 API Overview
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+### 🔹 POST `/cards`
+
+Issues a new single-use virtual card.
+
+**Request**:
+
+```json
+{
+  "user_id": "1234",
+  "amount": 200,
+  "currency": "USD"
+}
+```
+
+**Response**:
+
+```json
+{
+  "card_id": "abc123",
+  "status": "active",
+  "expires_at": "2025-06-30T12:00:00Z"
+}
+```
+
+### 🔹 GET `/cards/{id}`
+
+Returns the card status.
+
+### 🔹 POST `/charges`
+
+Charges a virtual card.
+
+## 🔐 Authentication
+
+* JWT with asymmetric RSA keys
+* Keys stored in Vault / AWS Secrets Manager
+* Role-Based Access Control:
+
+  * `admin`: full access
+  * `merchant`: can issue/charge
+  * `user`: limited access to own data
+
+## 📈 Observability & Monitoring
+
+* View Grafana Dashboards at `http://<grafana-host>:3000`
+* Metrics exposed on `/metrics` from each service
+* Alerts configured for:
+
+  * Error rate > 1%
+  * CPU usage > 80%
+* Traces captured with OpenTelemetry
+
+## 💣 Load Testing
+
+Simulate traffic with k6:
+
+```
+k6 run load-test/k6-script.js
+```
+
+Report includes:
+
+* 95th percentile latency
+* Throughput
+* 429 errors under rate limiting
+
+## 🛠 CI/CD & Deployment
+
+* Blue/Green deployment enabled via GitHub Actions
+* Auto-rollback on failed health checks
+* Canary deployments supported
+
+## 📬 Contributions
+
+Pull requests welcome. Please open issues for feature requests or bugs.
