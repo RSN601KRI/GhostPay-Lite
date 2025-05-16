@@ -1,6 +1,6 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { CircleCheck, CircleAlert, CircleClock, Activity, Zap } from "lucide-react";
+import { CircleCheck, CircleAlert, Clock, Activity, Zap } from "lucide-react";
 import { MetricsData } from "@/services/api-types";
 
 interface MetricsPanelProps {
@@ -30,7 +30,7 @@ export const MetricsPanel: React.FC<MetricsPanelProps> = ({ metrics }) => {
           
           <div className="flex flex-col items-center p-3 bg-background rounded-lg border">
             <div className="flex items-center justify-center w-10 h-10 rounded-full bg-blue-100 text-blue-800 mb-2">
-              <CircleClock className="h-5 w-5" />
+              <Clock className="h-5 w-5" />
             </div>
             <div className="text-2xl font-bold">{metrics.avgResponseTime}<span className="text-sm ml-1">ms</span></div>
             <div className="text-xs text-muted-foreground text-center">Avg Response</div>
