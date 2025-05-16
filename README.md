@@ -35,31 +35,23 @@ GhostPay-Lite is a lightweight, secure, and scalable **payment token microservic
 ## 📁 Project Structure
 
 ```
-
 ghostpay-lite/
-├── api-spec/                # OpenAPI spec (YAML)
-├── services/                # Microservices
-│   ├── auth/
-│   ├── cards/
-│   ├── charges/
-│   └── analytics/
-├── infra/
-│   ├── k8s/                 # Helm charts or manifests
-│   └── terraform/           # (Optional) Cloud infra automation
-├── ci-cd/
-│   └── github-actions.yaml  # CI/CD workflows
-├── secrets/
-│   └── vault-policies.hcl   # Vault config
-├── monitoring/
-│   ├── prometheus/
-│   └── grafana/
-├── load-test/
-│   └── k6-script.js         # Load testing scripts
-├── docs/
-│   └── architecture.md
-└── README.md
-
-````
+│
+├── prodserver/
+│   ├── index.js                  # Express server with Prometheus metrics
+│   ├── util.js                   # Heavy task simulation
+│   ├── docker-compose.yml        # Docker Compose config for Prometheus
+│   ├── prometheus.yml            # Prometheus config file
+│
+├── node_modules/
+├── public/
+├── src/
+├── components/
+├── .gitignore
+├── package.json
+├── package-lock.json
+├── README.md
+```
 
 ## 🚀 Getting Started
 
