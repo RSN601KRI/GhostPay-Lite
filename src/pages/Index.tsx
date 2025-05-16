@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Button } from '@/components/ui/button';
 import Login from "@/components/Login";
 import Header from "@/components/Header";
 import Dashboard from "@/components/Dashboard";
@@ -8,11 +9,14 @@ import SwaggerDoc from "@/components/SwaggerDoc";
 import SwaggerHeader from "@/components/SwaggerHeader";
 import { authService, User } from "@/services/auth-service";
 import { toast } from "sonner";
+import { useNavigate } from 'react-router-dom';
+import { Home } from 'lucide-react';
 
 const Index = () => {
   const [user, setUser] = useState<User | null>(null);
   const [activeTab, setActiveTab] = useState<string>("dashboard");
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Check if user is already authenticated
@@ -31,6 +35,7 @@ const Index = () => {
     authService.logout();
     setUser(null);
     toast.info("You have been logged out");
+    navigate('/');
   };
 
   if (isLoading) {
@@ -50,6 +55,13 @@ const Index = () => {
       <Header onLogout={handleLogout} />
       
       <div className="container mx-auto py-6 px-4 flex-1">
+        <div className="mb-6 flex items-center justify-between">
+          <Button variant="outline" size="sm" onClick={() => navigate('/')}>
+            <Home className="mr-2 h-4 w-4" />
+            Back to Home
+          </Button>
+        </div>
+        
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
           <div className="border-b">
             <TabsList className="w-full justify-start">

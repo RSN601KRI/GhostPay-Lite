@@ -14,7 +14,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
 
-    --primary: 210 100% 35%;
+    --primary: 215 100% 38%;
     --primary-foreground: 210 40% 98%;
 
     --secondary: 210 40% 96%;
@@ -46,7 +46,7 @@
     --popover: 222 47% 5%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 100% 35%;
+    --primary: 215 100% 45%;
     --primary-foreground: 210 40% 98%;
 
     --secondary: 217 33% 18%;
@@ -80,4 +80,16 @@
   code {
     @apply font-mono;
   }
+}
+
+.hero-gradient {
+  @apply bg-gradient-to-br from-ghost-800 via-ghost-700 to-ghost-600 text-white;
+}
+
+.card-gradient {
+  @apply bg-gradient-to-br from-card to-secondary/80 backdrop-blur-sm;
+}
+
+.feature-card {
+  @apply p-6 rounded-xl border shadow-sm transition-all duration-300 hover:shadow-md;
 }

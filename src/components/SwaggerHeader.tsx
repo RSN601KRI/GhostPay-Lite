@@ -3,6 +3,7 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { FileJson, ExternalLink, Github } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const SwaggerHeader: React.FC = () => {
   return (
@@ -22,17 +23,23 @@ const SwaggerHeader: React.FC = () => {
         </div>
       </div>
       <div className="flex flex-wrap gap-2 mt-4 md:mt-0">
-        <Button variant="outline" size="sm" className="h-9">
-          <FileJson className="mr-2 h-4 w-4" />
-          Download OpenAPI Spec
+        <Button variant="outline" size="sm" className="h-9" asChild>
+          <Link to="/api-docs/spec">
+            <FileJson className="mr-2 h-4 w-4" />
+            Download OpenAPI Spec
+          </Link>
         </Button>
-        <Button variant="outline" size="sm" className="h-9">
-          <Github className="mr-2 h-4 w-4" />
-          View on GitHub
+        <Button variant="outline" size="sm" className="h-9" asChild>
+          <a href="https://github.com/glebshatilov" target="_blank" rel="noopener noreferrer">
+            <Github className="mr-2 h-4 w-4" />
+            View on GitHub
+          </a>
         </Button>
-        <Button className="h-9">
-          <ExternalLink className="mr-2 h-4 w-4" />
-          Interactive Demo
+        <Button className="h-9" asChild>
+          <Link to="/interactive-demo">
+            <ExternalLink className="mr-2 h-4 w-4" />
+            Interactive Demo
+          </Link>
         </Button>
       </div>
     </div>
