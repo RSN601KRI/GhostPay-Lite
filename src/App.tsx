@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import Home from "./pages/Home";
 import OpenApiSpec from "./pages/OpenApiSpec";
 import InteractiveDemo from "./pages/InteractiveDemo";
+import ApiDocs from "./pages/ApiDocs";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/" element={<Home />} />
           <Route path="/dashboard" element={<Index />} />
           <Route path="/api-docs/spec" element={<OpenApiSpec />} />
+          <Route path="/api-docs" element={<ApiDocs />} />
           <Route path="/interactive-demo" element={<InteractiveDemo />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
